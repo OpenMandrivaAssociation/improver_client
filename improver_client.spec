@@ -9,9 +9,19 @@ License:        GPL
 URL:            http://www.rosalab.ru
 Group:          System/Base
 Source0:        %{name}-%{version}.tar.bz2
-BuildRequires:  gnome-doc-utils, libgnomeui2-devel
-BuildRequires:  gtk2-devel, desktop-file-utils, libbonoboui
-Requires:	pciutils, ldetect, coreutils, usermode-consoleonly, imagemagick, lsb-release >= 2.0, zip, lshw
+BuildRequires:  gnome-doc-utils
+BuildRequires:  libgnomeui2-devel
+BuildRequires:  gtk2-devel
+BuildRequires:  desktop-file-utils
+BuildRequires:  libbonoboui
+Requires:	pciutils
+Requires:       ldetect
+Requires:       coreutils
+Requires:       usermode-consoleonly
+Requires:       imagemagick
+Requires:       lsb-release >= 2.0
+Requires:       zip
+Requires:       lshw
 
 %description
 GUI for testers.
@@ -29,71 +39,52 @@ GUI for testers.
 echo "%{name} %{version}-%{release}" > etc/improver/client_version.conf
 echo "%{protocol_name} %{protocol_version}" > etc/improver/protocol_version.conf
 
-mkdir -p $RPM_BUILD_ROOT/etc/improver
-install -m 644 etc/improver/client_version.conf $RPM_BUILD_ROOT/etc/improver
-install -m 644 etc/improver/protocol_version.conf $RPM_BUILD_ROOT/etc/improver
+mkdir -p %buildroot%_sysconfdir/improver
+install -m 644 etc/improver/client_version.conf %buildroot%_sysconfdir/improver
+install -m 644 etc/improver/protocol_version.conf %buildroot%_sysconfdir/improver
 
-mkdir -p $RPM_BUILD_ROOT/usr/share/pixmaps/%{name}
-install -m 644 usr/share/pixmaps/%{name}/*.png $RPM_BUILD_ROOT/usr/share/pixmaps/%{name}
-install -m 644 usr/share/pixmaps/%{name}/*.svg $RPM_BUILD_ROOT/usr/share/pixmaps/%{name}
-install -m 644 usr/share/%{name}.glade $RPM_BUILD_ROOT/usr/share
+mkdir -p %buildroot%_datadir/pixmaps/%{name}
+install -m 644 usr/share/pixmaps/%{name}/*.png %buildroot%_datadir/pixmaps/%{name}
+install -m 644 usr/share/pixmaps/%{name}/*.svg %buildroot%_datadir/pixmaps/%{name}
+install -m 644 usr/share/%{name}.glade %buildroot%_datadir
 
-mkdir -p $RPM_BUILD_ROOT/usr/bin
-install -m 755 usr/bin/script_hw_info_tar $RPM_BUILD_ROOT/usr/bin
-install -m 755 usr/bin/script_hw_info $RPM_BUILD_ROOT/usr/bin
-install -m 755 usr/bin/script_convert_screenshots $RPM_BUILD_ROOT/usr/bin
+mkdir -p %buildroot/usr/bin
+install -m 755 usr/bin/script_hw_info_tar %buildroot%_bindir
+install -m 755 usr/bin/script_hw_info %buildroot%_bindir
+install -m 755 usr/bin/script_convert_screenshots %buildroot%_bindir
 
-mkdir -p $RPM_BUILD_ROOT/var/local/improver_client/
-install -m 644 var/local/improver_client/improver_client.conf $RPM_BUILD_ROOT/var/local/improver_client/
+mkdir -p %buildroot/var/local/improver_client/
+install -m 644 var/local/improver_client/improver_client.conf %buildroot/var/local/improver_client/
 
-mkdir -p $RPM_BUILD_ROOT/usr/share/locale/ru_RU/LC_MESSAGES/
-mkdir -p $RPM_BUILD_ROOT/usr/share/locale/ru_UA/LC_MESSAGES/
-mkdir -p $RPM_BUILD_ROOT/usr/share/locale/ru_RU/LC_MESSAGES/
-mkdir -p $RPM_BUILD_ROOT/usr/share/locale/en/LC_MESSAGES/
-mkdir -p $RPM_BUILD_ROOT/usr/share/locale/en_US/LC_MESSAGES/
-install -m 644 usr/share/locale/ru/%{name}.mo $RPM_BUILD_ROOT/usr/share/locale/ru_RU/LC_MESSAGES/
-install -m 644 usr/share/locale/ua/%{name}.mo $RPM_BUILD_ROOT/usr/share/locale/ru_UA/LC_MESSAGES/
-install -m 644 usr/share/locale/en/%{name}.mo $RPM_BUILD_ROOT/usr/share/locale/en/LC_MESSAGES/
-install -m 644 usr/share/locale/us/%{name}.mo $RPM_BUILD_ROOT/usr/share/locale/en_US/LC_MESSAGES/
+mkdir -p %buildroot%_datadir/locale/ru_RU/LC_MESSAGES/
+mkdir -p %buildroot%_datadir/locale/ru_UA/LC_MESSAGES/
+mkdir -p %buildroot%_datadir/locale/ru_RU/LC_MESSAGES/
+mkdir -p %buildroot%_datadir/locale/en/LC_MESSAGES/
+mkdir -p %buildroot%_datadir/locale/en_US/LC_MESSAGES/
+install -m 644 usr/share/locale/ru/%{name}.mo %buildroot%_datadir/locale/ru_RU/LC_MESSAGES/
+install -m 644 usr/share/locale/ua/%{name}.mo %buildroot%_datadir/locale/ru_UA/LC_MESSAGES/
+install -m 644 usr/share/locale/en/%{name}.mo %buildroot%_datadir/locale/en/LC_MESSAGES/
+install -m 644 usr/share/locale/us/%{name}.mo %buildroot%_datadir/locale/en_US/LC_MESSAGES/
 
-mkdir -p $RPM_BUILD_ROOT/usr/share/icons/hicolor/16x16/apps
-mkdir -p $RPM_BUILD_ROOT/usr/share/icons/hicolor/22x22/apps
-mkdir -p $RPM_BUILD_ROOT/usr/share/icons/hicolor/32x32/apps
-mkdir -p $RPM_BUILD_ROOT/usr/share/icons/hicolor/48x48/apps
-mkdir -p $RPM_BUILD_ROOT/usr/share/icons/hicolor/64x64/apps
-mkdir -p $RPM_BUILD_ROOT/usr/share/icons/hicolor/128x128/apps
-mkdir -p $RPM_BUILD_ROOT/usr/share/icons/oxygen/16x16/apps
-mkdir -p $RPM_BUILD_ROOT/usr/share/icons/oxygen/22x22/apps
-mkdir -p $RPM_BUILD_ROOT/usr/share/icons/oxygen/32x32/apps
-mkdir -p $RPM_BUILD_ROOT/usr/share/icons/oxygen/48x48/apps
-mkdir -p $RPM_BUILD_ROOT/usr/share/icons/oxygen/64x64/apps
-mkdir -p $RPM_BUILD_ROOT/usr/share/icons/oxygen/128x128/apps
-
-install -m 644 icons/hicolor/16/* $RPM_BUILD_ROOT/usr/share/icons/hicolor/16x16/apps
-install -m 644 icons/hicolor/22/* $RPM_BUILD_ROOT/usr/share/icons/hicolor/22x22/apps
-install -m 644 icons/hicolor/32/* $RPM_BUILD_ROOT/usr/share/icons/hicolor/32x32/apps
-install -m 644 icons/hicolor/48/* $RPM_BUILD_ROOT/usr/share/icons/hicolor/48x48/apps
-install -m 644 icons/hicolor/64/* $RPM_BUILD_ROOT/usr/share/icons/hicolor/64x64/apps
-install -m 644 icons/hicolor/128/* $RPM_BUILD_ROOT/usr/share/icons/hicolor/128x128/apps
-
-install -m 644 icons/oxygen/16/* $RPM_BUILD_ROOT/usr/share/icons/oxygen/16x16/apps
-install -m 644 icons/oxygen/22/* $RPM_BUILD_ROOT/usr/share/icons/oxygen/22x22/apps
-install -m 644 icons/oxygen/32/* $RPM_BUILD_ROOT/usr/share/icons/oxygen/32x32/apps
-install -m 644 icons/oxygen/48/* $RPM_BUILD_ROOT/usr/share/icons/oxygen/48x48/apps
-install -m 644 icons/oxygen/64/* $RPM_BUILD_ROOT/usr/share/icons/oxygen/64x64/apps
-install -m 644 icons/oxygen/128/* $RPM_BUILD_ROOT/usr/share/icons/oxygen/128x128/apps
+for i in 16 22 32 48 64 128; 
+do
+	mkdir -p %buildroot%_datadir/icons/hicolor/${i}x${i}/apps
+	mkdir -p %buildroot%_datadir/icons/oxygen/${i}x${i}/apps
+	install -m 644 icons/oxygen/${i}/* %buildroot%_datadir/icons/oxygen/${i}x${i}/apps
+        install -m 644 icons/hicolor/${i}/* %buildroot%_datadir/icons/hicolor/${i}x${i}/apps
+done
 
 desktop-file-install --delete-original          \
   --dir ${RPM_BUILD_ROOT}%{_datadir}/applications               \
     %{name}.desktop
 
-mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/security/console.apps
-install -m 644 etc/security/console.apps/improver $RPM_BUILD_ROOT%{_sysconfdir}/security/console.apps/
-mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/pam.d
-install -m 644 etc/pam.d/improver $RPM_BUILD_ROOT%{_sysconfdir}/pam.d/
+mkdir -p %buildroot%{_sysconfdir}/security/console.apps
+install -m 644 etc/security/console.apps/improver %buildroot%{_sysconfdir}/security/console.apps/
+mkdir -p %buildroot%{_sysconfdir}/pam.d
+install -m 644 etc/pam.d/improver %buildroot%{_sysconfdir}/pam.d/
 
-mkdir -p $RPM_BUILD_ROOT/usr/bin
-cp -P $RPM_BUILD_DIR/%{name}-%{version}/ln/* $RPM_BUILD_ROOT/usr/bin/
+mkdir -p %buildroot%_bindir
+cp -P $RPM_BUILD_DIR/%{name}-%{version}/ln/* %buildroot%_bindir
 
 %files
 %doc AUTHORS COPYING INSTALL README NEWS
