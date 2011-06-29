@@ -13,7 +13,7 @@ Source0:	%{name}-%{version}.tar.bz2
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:	gnome-doc-utils
 BuildRequires:	libgnomeui2_0
-BuildRequires:	libglade2.0_0
+BuildRequires:	libglade2.0
 BuildRequires:	gtk2-devel
 BuildRequires:	desktop-file-utils
 BuildRequires:	libbonoboui
