@@ -15,6 +15,7 @@ BuildRequires:  gtk2-devel
 BuildRequires:  desktop-file-utils
 BuildRequires:  libbonoboui2-devel
 BuildRequires:  libglade2.0-devel
+BuildRequires:  sqlite3-devel
 Requires:	pciutils
 Requires:       ldetect
 Requires:       coreutils
