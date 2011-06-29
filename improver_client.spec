@@ -27,6 +27,24 @@ Requires:       lshw
 %description
 GUI for testers.
 
+%files -f %name.lang
+%doc AUTHORS COPYING INSTALL README NEWS
+%{_sysconfdir}/*
+%{_bindir}/improver
+%{_bindir}/improver_client
+%{_bindir}/script_hw_info_tar
+%{_bindir}/script_hw_info
+%{_bindir}/script_convert_screenshots
+%{_datadir}/applications/%{name}.desktop
+%{_datadir}/pixmaps/%{name}/*.png
+%{_datadir}/pixmaps/%{name}/*.svg
+%{_datadir}/icons/hicolor/*
+%{_datadir}/icons/oxygen/*
+%{_datadir}/improver_client.glade
+%{_var}/local/improver_client/improver_client.conf
+
+#--------------------------------------------------------------------
+
 %prep
 %setup -q 
 
@@ -85,20 +103,4 @@ mkdir -p %buildroot%_bindir
 cp -P $RPM_BUILD_DIR/%{name}-%{version}/ln/* %buildroot%_bindir
 
 %find_lang %name
-
-%files -f %name.lang
-%doc AUTHORS COPYING INSTALL README NEWS
-%{_sysconfdir}/*
-%{_bindir}/improver
-%{_bindir}/improver_client
-%{_bindir}/script_hw_info_tar
-%{_bindir}/script_hw_info
-%{_bindir}/script_convert_screenshots
-%{_datadir}/applications/%{name}.desktop
-%{_datadir}/pixmaps/%{name}/*.png
-%{_datadir}/pixmaps/%{name}/*.svg
-%{_datadir}/icons/hicolor/*
-%{_datadir}/icons/oxygen/*
-%{_datadir}/improver_client.glade
-%{_var}/local/improver_client/improver_client.conf
 
