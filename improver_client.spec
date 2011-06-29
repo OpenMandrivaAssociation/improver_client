@@ -37,13 +37,11 @@ rm -rf $RPM_BUILD_ROOT
 
 make DESTDIR=$RPM_BUILD_ROOT install
 
-echo "%{name} %{version}-%{release}" > $RPM_BUILD_ROOT/%{_sysconfdir}/improver/client_version.conf
-echo "%{protocol_name} %{protocol_version}" > $RPM_BUILD_ROOT/%{_sysconfdir}/improver/protocol_version.conf
-
-mkdir -p $RPM_BUILD_ROOT/etc/improver
-install -m 644 %{_sysconfdir}/improver/client_version.conf $RPM_BUILD_ROOT/%{_sysconfdir}/improver
-install -m 644 %{_sysconfdir}/improver/protocol_version.conf $RPM_BUILD_ROOT/%{_sysconfdir}/improver
-
+echo "%{name} %{version}-%{release}" > etc/improver/client_version.conf
+echo "%{protocol_name} %{protocol_version}" > etc/improver/protocol_version.conf
+ 
+install -m 644 etc/improver/client_version.conf $RPM_BUILD_ROOT/%{_sysconfdir}/improver
+install -m 644 etc/improver/protocol_version.conf $RPM_BUILD_ROOT/%{_sysconfdir}/improver
 mkdir -p $RPM_BUILD_ROOT/usr/share/%{name}/pixmaps
 install -m 644 usr/share/improver_client/pixmaps/*.png $RPM_BUILD_ROOT/usr/share/%{name}/pixmaps/
 install -m 644 usr/share/improver_client/pixmaps/*.svg $RPM_BUILD_ROOT/usr/share/%{name}/pixmaps/
