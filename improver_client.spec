@@ -1,17 +1,24 @@
 %define protocol_name "augeas_protocol"
 %define protocol_version "2.0"
 
-Summary:        Improver client
-Name:           improver_client
-Version:        2.0.0
-Release:        14%{?dist}
-License:        GPL
-#URL:            
-Group:          User Interface/Desktops
-Source0:        %{name}-%{version}.tar.bz2
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-BuildRequires:  gnome-doc-utils, libgnomeui2-devel, libglade2.0_0-devel
-BuildRequires:  gtk2-devel, desktop-file-utils, libbonoboui, libsqlite3-devel
+Summary:	Improver client
+Name:		improver_client
+Version:	2.0.0
+Release:	15%{?dist}
+License:	GPLv3
+#Packager:	Leontiev Danila <danila.leontiev@rosalab.ru>
+URL:		http://projects.rosalab.ru/projects/improver
+Group:		System/Base
+Source0:	%{name}-%{version}.tar.bz2
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+BuildRequires:	gnome-doc-utils
+BuildRequires:	libgnomeui2_0
+BuildRequires:	libglade2.0_0
+BuildRequires:	gtk2-devel
+BuildRequires:	desktop-file-utils
+BuildRequires:	libbonoboui
+BuildRequires:	sqlite3-devel
+
 Requires:	pciutils, ldetect, coreutils, usermode-consoleonly, imagemagick, lsb-release >= 2.0, zip, lshw, desktop-common-data
 
 
@@ -30,12 +37,12 @@ rm -rf $RPM_BUILD_ROOT
 
 make DESTDIR=$RPM_BUILD_ROOT install
 
-echo "%{name} %{version}-%{release}" > etc/improver/client_version.conf
-echo "%{protocol_name} %{protocol_version}" > etc/improver/protocol_version.conf
+echo "%{name} %{version}-%{release}" > %{_sysconfdir}/improver/client_version.conf
+echo "%{protocol_name} %{protocol_version}" > %{_sysconfdir}/improver/protocol_version.conf
 
 mkdir -p $RPM_BUILD_ROOT/etc/improver
-install -m 644 etc/improver/client_version.conf $RPM_BUILD_ROOT/etc/improver
-install -m 644 etc/improver/protocol_version.conf $RPM_BUILD_ROOT/etc/improver
+install -m 644 %{_sysconfdir}/improver/client_version.conf $RPM_BUILD_ROOT/%{_sysconfdir}/improver
+install -m 644 %{_sysconfdir}/improver/protocol_version.conf $RPM_BUILD_ROOT/%{_sysconfdir}/improver
 
 mkdir -p $RPM_BUILD_ROOT/usr/share/%{name}/pixmaps
 install -m 644 usr/share/improver_client/pixmaps/*.png $RPM_BUILD_ROOT/usr/share/%{name}/pixmaps/
@@ -48,15 +55,14 @@ install -m 755 usr/bin/script_hw_info_tar $RPM_BUILD_ROOT/usr/bin
 install -m 755 usr/bin/script_hw_info $RPM_BUILD_ROOT/usr/bin
 install -m 755 usr/bin/script_convert_screenshots $RPM_BUILD_ROOT/usr/bin
 
-mkdir -p $RPM_BUILD_ROOT/var/local/improver_client/
-mkdir -p $RPM_BUILD_ROOT/var/local/improver/
-install -m 644 var/local/improver_client/improver_client.conf $RPM_BUILD_ROOT/var/local/improver_client/
-install -m 644 var/local/improver_client/bd $RPM_BUILD_ROOT/var/local/improver_client/
-install -m 644 var/local/improver_client/bd_clean $RPM_BUILD_ROOT/var/local/improver_client/
-install -m 644 var/local/improver/* $RPM_BUILD_ROOT/var/local/improver/
+#mkdir -p $RPM_BUILD_ROOT/var/improver_client/
+#mkdir -p $RPM_BUILD_ROOT/var/improver/
+install -m 644 var/local/improver_client/improver_client.conf $RPM_BUILD_ROOT/usr/share/improver_client
+install -m 644 var/local/improver_client/bd $RPM_BUILD_ROOT/usr/share/improver_client
+install -m 644 var/local/improver_client/bd_clean $RPM_BUILD_ROOT/usr/share/improver_client
+install -m 644 var/local/improver/* $RPM_BUILD_ROOT/usr/share/improver_client
 
-#
-#
+
 mkdir -p $RPM_BUILD_ROOT/usr/share/locale/ru_RU/LC_MESSAGES/
 mkdir -p $RPM_BUILD_ROOT/usr/share/locale/ru_UA/LC_MESSAGES/
 #mkdir -p $RPM_BUILD_ROOT/usr/share/locale/ru_RU/LC_MESSAGES/
@@ -68,7 +74,6 @@ install -m 644 usr/share/locale/ua/%{name}.mo $RPM_BUILD_ROOT/usr/share/locale/r
 install -m 644 usr/share/locale/en/%{name}.mo $RPM_BUILD_ROOT/usr/share/locale/en/LC_MESSAGES/
 install -m 644 usr/share/locale/us/%{name}.mo $RPM_BUILD_ROOT/usr/share/locale/en_US/LC_MESSAGES/
 #install -m 644 usr/share/locale/br/%{name}.mo $RPM_BUILD_ROOT/usr/share/locale/pt_BR/LC_MESSAGES/
-#
 #
 
 mkdir -p $RPM_BUILD_ROOT/usr/share/icons/hicolor/16x16/apps
@@ -98,23 +103,22 @@ install -m 644 icons/oxygen/48/* $RPM_BUILD_ROOT/usr/share/icons/oxygen/48x48/ap
 install -m 644 icons/oxygen/64/* $RPM_BUILD_ROOT/usr/share/icons/oxygen/64x64/apps
 install -m 644 icons/oxygen/128/* $RPM_BUILD_ROOT/usr/share/icons/oxygen/128x128/apps
 
-desktop-file-install --delete-original          \
-  --dir ${RPM_BUILD_ROOT}%{_datadir}/applications               \
+desktop-file-install --delete-original \
+  --dir ${RPM_BUILD_ROOT}%{_datadir}/applications \
     %{name}.desktop
 
 mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/security/console.apps
-install -m 644 etc/security/console.apps/improver $RPM_BUILD_ROOT%{_sysconfdir}/security/console.apps/
+install -m 644 %{_sysconfdir}/security/console.apps/improver $RPM_BUILD_ROOT%{_sysconfdir}/security/console.apps/
 mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/pam.d
-install -m 644 etc/pam.d/improver $RPM_BUILD_ROOT%{_sysconfdir}/pam.d/
+install -m 644 %{_sysconfdir}/pam.d/improver $RPM_BUILD_ROOT%{_sysconfdir}/pam.d/
 
 mkdir -p $RPM_BUILD_ROOT/usr/bin
 cp -P $RPM_BUILD_DIR/%{name}-%{version}/ln/* $RPM_BUILD_ROOT/usr/bin/
-#ln -sf ln/consolehelper $RPM_BUILD_ROOT%{_bindir}/%{name}
 
 %files
 %defattr(-, root, root)
 %doc AUTHORS COPYING INSTALL README NEWS
-%{_sysconfdir}/*
+%config(noreplace) %{_sysconfdir}/*
 %{_bindir}/improver
 %{_bindir}/improver_client
 %{_bindir}/script_hw_info_tar
@@ -128,23 +132,27 @@ cp -P $RPM_BUILD_DIR/%{name}-%{version}/ln/* $RPM_BUILD_ROOT/usr/bin/
 %{_datadir}/icons/hicolor/*
 %{_datadir}/icons/oxygen/*
 #%{_datadir}/pixmaps/%{name}.png
-%{_datadir}/improver_client/improver_client.glade
-/var/local/improver_client/*
-/var/local/improver/*
+#%{_datadir}/improver_client/improver_client.glade
+%{_datadir}/improver_client/*
+#/var/improver_client/*
+#/var/improver/*
 %{_datadir}/locale/*
 
 %ifarch noarch
-/usr/lib/debug/*
-/usr/lib/debug/.build-id/e5/
+%{_libdir}/debug/*
+%{_libdir}/debug/.build-id/e5/
 %endif
-#ru_RU/LC_MESSAGES/%{name}.mo
-#/usr/local/bin/augeas_client
-#%{_sysconfdir}/pam.d/augeas_client
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %changelog
+* Wed Jun 29 2011 Leontiev Danila 2.0.0-15
+- Spec file fixed
+
+* Wed Jun 29 2011 Leontiev Danila 2.0.0-14
+- Locale fixed
+
 * Tue Jun 28 2011 Leontiev Danila 2.0.0-13
 - Fixed little buff with wish file attach
 - Added screenshoot convertation script
