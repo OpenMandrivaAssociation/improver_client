@@ -37,8 +37,8 @@ rm -rf $RPM_BUILD_ROOT
 
 make DESTDIR=$RPM_BUILD_ROOT install
 
-echo "%{name} %{version}-%{release}" > %{_sysconfdir}/improver/client_version.conf
-echo "%{protocol_name} %{protocol_version}" > %{_sysconfdir}/improver/protocol_version.conf
+echo "%{name} %{version}-%{release}" > $RPM_BUILD_ROOT/%{_sysconfdir}/improver/client_version.conf
+echo "%{protocol_name} %{protocol_version}" > $RPM_BUILD_ROOT/%{_sysconfdir}/improver/protocol_version.conf
 
 mkdir -p $RPM_BUILD_ROOT/etc/improver
 install -m 644 %{_sysconfdir}/improver/client_version.conf $RPM_BUILD_ROOT/%{_sysconfdir}/improver
