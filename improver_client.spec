@@ -4,7 +4,7 @@
 Summary:        Improver client
 Name:           improver_client
 Version:        %{protocol_version}.0
-Release:        26
+Release:        27
 License:        GPL
 URL:            http://www.rosalab.ru
 Group:          System/Base
@@ -33,16 +33,17 @@ GUI for testers.
 %{_sysconfdir}/*
 %{_bindir}/improver
 %{_bindir}/improver_client
+%{_bindir}/script_hw
 %{_bindir}/script_hw_info_tar
 %{_bindir}/script_hw_info
 %{_bindir}/script_convert_screenshots
 %{_datadir}/applications/%{name}.desktop
-%{_datadir}/pixmaps/%{name}/*.png
-%{_datadir}/pixmaps/%{name}/*.svg
 %{_datadir}/icons/hicolor/*
 %{_datadir}/icons/oxygen/*
-%{_datadir}/improver_client.glade
-%{_var}/local/improver_client/improver_client.conf
+%{_datadir}/%{name}/pixmaps/
+%{_datadir}/%{name}/bd*
+%{_datadir}/%{name}/improver_client.conf
+%{_datadir}/%{name}/improver_client.glade
 
 #--------------------------------------------------------------------
 
@@ -60,18 +61,21 @@ mkdir -p %buildroot%_sysconfdir/improver
 echo "%{name} %{version}-%{release}" > %buildroot%_sysconfdir/improver/client_version.conf
 echo "%{protocol_name} %{protocol_version}" > %buildroot%_sysconfdir/improver/protocol_version.conf
 
-mkdir -p %buildroot%_datadir/pixmaps/%{name}
-install -m 644 usr/share/%{name}/pixmaps/*.png %buildroot%_datadir/pixmaps/%{name}
-install -m 644 usr/share/%{name}/pixmaps/*.svg %buildroot%_datadir/pixmaps/%{name}
-install -m 644 usr/share/%{name}/%name.glade %buildroot%_datadir
+mkdir -p %buildroot%_datadir/%{name}/pixmaps
+install -m 644 usr/share/%{name}/pixmaps/*.png %buildroot%_datadir/%{name}/pixmaps
+install -m 644 usr/share/%{name}/pixmaps/*.svg %buildroot%_datadir/%{name}/pixmaps
+install -m 644 usr/share/%{name}/%name.glade %buildroot%_datadir/%{name}
+
+install -m 755 usr/bin/script_hw %buildroot%_bindir
 
 mkdir -p %buildroot/usr/bin
 install -m 755 usr/bin/script_hw_info_tar %buildroot%_bindir
 install -m 755 usr/bin/script_hw_info %buildroot%_bindir
 install -m 755 usr/bin/script_convert_screenshots %buildroot%_bindir
 
-mkdir -p %buildroot/var/local/improver_client/
-install -m 644 var/local/improver_client/improver_client.conf %buildroot/var/local/improver_client/
+install -m 644 usr/share/improver_client/improver_client.conf %buildroot%_datadir/%{name}
+install -m 644 usr/share/improver_client/bd %buildroot%_datadir/%{name}
+install -m 644 usr/share/improver_client/bd_clean %buildroot%_datadir/%{name}
 
 mkdir -p %buildroot%_datadir/locale/ru_RU/LC_MESSAGES/
 mkdir -p %buildroot%_datadir/locale/ru_UA/LC_MESSAGES/
