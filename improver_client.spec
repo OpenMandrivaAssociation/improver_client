@@ -4,11 +4,12 @@
 Summary:        Improver client
 Name:           improver_client
 Version:        %{protocol_version}.0
-Release:        28
+Release:        29
 License:        GPL
 URL:            http://www.rosalab.ru
 Group:          System/Base
 Source0:        %{name}-%{version}.tar.bz2
+Obsoletes: augeas_client
 BuildRequires:  gnome-doc-utils
 BuildRequires:  libgnomeui2-devel
 BuildRequires:  gtk2-devel
