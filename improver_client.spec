@@ -106,7 +106,7 @@ mkdir -p %buildroot%{_sysconfdir}/pam.d
 install -m 644 etc/pam.d/improver %buildroot%{_sysconfdir}/pam.d/
 
 mkdir -p %buildroot%_bindir
-cp -P $RPM_BUILD_DIR/%{name}-%{version}/ln/* %buildroot%_bindir
+cp -P %{_builddir}/%{name}-%{version}/ln/* %buildroot%_bindir
 
 %find_lang %name
 
