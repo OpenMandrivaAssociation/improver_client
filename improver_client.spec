@@ -97,7 +97,7 @@ do
 done
 
 desktop-file-install --delete-original          \
-  --dir ${RPM_BUILD_ROOT}%{_datadir}/applications               \
+  --dir %{buildroot}%{_datadir}/applications               \
     %{name}.desktop
 
 mkdir -p %buildroot%{_sysconfdir}/security/console.apps
