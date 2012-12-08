@@ -1,0 +1,10 @@
+diff -urN improver_client-2.0.0/src/regform.c improver_client-2.0.0-patched/src/regform.c
+--- improver_client-2.0.0/src/regform.c	2011-07-05 23:30:56.000000000 +1100
++++ improver_client-2.0.0-patched/src/regform.c	2012-09-06 02:15:58.830214180 +1100
+@@ -1,5 +1,5 @@
+ #include <gtk/gtk.h>
+-#include <glib/gregex.h>
++#include <glib.h>
+ #include "support.h"
+ 
+ gint

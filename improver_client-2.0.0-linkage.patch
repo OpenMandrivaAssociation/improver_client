@@ -1,0 +1,12 @@
+diff -urN improver_client-2.0.0/configure.in improver_client-2.0.0-patched/configure.in
+--- improver_client-2.0.0/configure.in	2011-06-29 23:51:47.000000000 +1100
++++ improver_client-2.0.0-patched/configure.in	2012-09-06 02:36:13.127044270 +1100
+@@ -11,7 +11,7 @@
+ AM_PROG_CC_STDC
+ AC_HEADER_STDC
+ 
+-pkg_modules="gtk+-2.0 >= 2.0.0, gmodule-2.0 glib-2.0 libglade-2.0"
++pkg_modules="gtk+-2.0 >= 2.0.0, gmodule-2.0 glib-2.0 gthread-2.0 libglade-2.0"
+ PKG_CHECK_MODULES(PACKAGE, [$pkg_modules])
+ #CFLAGS="xml2-config --cflags"
+ #LIBS="xml2-config --libs"
