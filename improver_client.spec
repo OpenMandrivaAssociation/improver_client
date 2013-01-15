@@ -11,6 +11,7 @@ URL:		http://www.rosalab.ru
 Source0:	%{name}-%{version}.tar.bz2
 Patch0:		improver_client-2.0.0-glib.patch
 Patch1:		improver_client-2.0.0-linkage.patch
+Patch2:		improver_client-automake-1.13.patch
 BuildRequires:	gnome-doc-utils
 BuildRequires:	pkgconfig(libgnomeui-2.0)
 BuildRequires:	pkgconfig(gtk+-2.0)
@@ -51,8 +52,7 @@ GUI for testers.
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p1
+%apply_patches
 find . -perm 0640 -exec chmod 644 '{}' \;
 
 %build
