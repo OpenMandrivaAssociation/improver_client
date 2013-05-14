@@ -5,19 +5,20 @@ Summary:	Improver client
 Name:		improver_client
 Version:	%{protocol_version}.0
 Release:	35
-License:	GPL
+License:	GPLv2
 Group:		System/Base
-URL:		http://www.rosalab.ru
+Url:		http://www.rosalab.ru
 Source0:	%{name}-%{version}.tar.bz2
 Patch0:		improver_client-2.0.0-glib.patch
 Patch1:		improver_client-2.0.0-linkage.patch
 Patch2:		improver_client-automake-1.13.patch
-BuildRequires:	gnome-doc-utils
-BuildRequires:	pkgconfig(libgnomeui-2.0)
-BuildRequires:	pkgconfig(gtk+-2.0)
+
 BuildRequires:	desktop-file-utils
+BuildRequires:	gnome-doc-utils
+BuildRequires:	pkgconfig(gtk+-2.0)
 BuildRequires:	pkgconfig(libbonoboui-2.0)
 BuildRequires:	pkgconfig(libglade-2.0)
+BuildRequires:	pkgconfig(libgnomeui-2.0)
 BuildRequires:	pkgconfig(sqlite3)
 Requires:	pciutils
 Requires:	ldetect
