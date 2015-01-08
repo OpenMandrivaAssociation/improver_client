@@ -4,7 +4,7 @@
 Summary:	Improver client
 Name:		improver_client
 Version:	%{protocol_version}.0
-Release:	42
+Release:	43
 License:	GPLv2
 Group:		System/Base
 Url:		http://www.rosalab.ru
@@ -16,9 +16,7 @@ Patch2:		improver_client-automake-1.13.patch
 BuildRequires:	desktop-file-utils
 BuildRequires:	gnome-doc-utils
 BuildRequires:	pkgconfig(gtk+-2.0)
-BuildRequires:	pkgconfig(libbonoboui-2.0)
 BuildRequires:	pkgconfig(libglade-2.0)
-BuildRequires:	pkgconfig(libgnomeui-2.0)
 BuildRequires:	pkgconfig(sqlite3)
 Requires:	pciutils
 Requires:	ldetect
@@ -55,11 +53,14 @@ GUI for testers.
 %setup -q
 %apply_patches
 find . -perm 0640 -exec chmod 644 '{}' \;
+sed -i 's#-lgnomeui-2##' src/Makefile src/Makefile.*
 
 %build
+export CC=gcc
+export CXX=g++
 libtoolize
 autoreconf -fi
-%configure2_5x
+%configure
 %make
 
 %install
