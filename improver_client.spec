@@ -4,7 +4,7 @@
 Summary:	Improver client
 Name:		improver_client
 Version:	%{protocol_version}.0
-Release:	44
+Release:	45
 License:	GPLv2
 Group:		System/Base
 Url:		http://www.rosalab.ru
