@@ -51,7 +51,7 @@ GUI for testers.
 
 %prep
 %setup -q
-%apply_patches
+%autopatch -p1
 find . -perm 0640 -exec chmod 644 '{}' \;
 sed -i 's#-lgnomeui-2##' src/Makefile src/Makefile.*
 
