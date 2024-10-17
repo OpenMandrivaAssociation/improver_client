@@ -7,7 +7,7 @@ Version:	%{protocol_version}.0
 Release:	45
 License:	GPLv2
 Group:		System/Base
-Url:		http://www.rosalab.ru
+Url:		https://www.rosalab.ru
 Source0:	%{name}-%{version}.tar.bz2
 Patch0:		improver_client-2.0.0-glib.patch
 Patch1:		improver_client-2.0.0-linkage.patch
