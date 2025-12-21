@@ -13,6 +13,11 @@ Patch0:		improver_client-2.0.0-glib.patch
 Patch1:		improver_client-2.0.0-linkage.patch
 Patch2:		improver_client-automake-1.13.patch
 
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	desktop-file-utils
 BuildRequires:	gnome-doc-utils
 BuildRequires:	pkgconfig(gtk+-2.0)
